@@ -91,7 +91,4 @@ def multiply(x, y):
 var = multiply
 print(var(2, 3))
 
-# Regular expressions - Regex
-# Doctesting
-# python3 -m doctest -v exampel_module.py
-# Unittesting - more flexible
+# Unittesting - more flexible than doctest
