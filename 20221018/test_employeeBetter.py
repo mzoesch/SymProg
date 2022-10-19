@@ -21,7 +21,7 @@ class TestEmployee(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print('tearDownClass')  # Popping DB for example
+        print('tearDownClass')  # Dropping DB for example
 
     def test_email(self):
         self.assertEqual(self.emp_1.email, 'John.Smith@company.com')
