@@ -29,7 +29,7 @@ def hello_semester():
     >>> hello_semester()
     Welcome to "Symbolische Programmierung" WS 21/22
     """
-    print('Welcome to "Symbolische Programmierung" WS 21/22')
+    return print('Welcome to "Symbolische Programmierung" WS 21/22')
 
 
 def modulo(x, y):
