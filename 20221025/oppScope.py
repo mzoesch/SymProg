@@ -1,6 +1,3 @@
-from unicodedata import name
-
-
 class ScopeClass:
 
     def __init__(self, var1, var2, var3, var4):
@@ -16,9 +13,8 @@ if __name__ == '__main__':
     print(scope._var2)
     # print(scope.__var3) # Will throw
     # Get around
-    scope.__dict__['_ScopeClass__var3']  # or set value
-    # scope.__dict__['_ScopeClass__var3'] = 4
-    # Must use this naming convention to be used
+    scope.__dict__['_ScopeClass__var3']  # Var is renamed to _ClassName__var
     print(scope._ScopeClass__var3)
+    # More info:
     # https://stackoverflow.com/questions/1641219/does-python-have-private-variables-in-classes
     # https://stackoverflow.com/questions/1301346/what-is-the-meaning-of-single-and-double-underscore-before-an-object-name

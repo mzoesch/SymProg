@@ -130,3 +130,11 @@ dmypy.json
 
 # Pycharm
 .idea/
+
+# Max OS
+.DS_Store
+
+# Prj files
+file.txt
+*.pdf
+!regex.pdf
