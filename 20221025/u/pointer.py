@@ -22,6 +22,7 @@ def main():
 
     # Here False
     """
+
     >>> x,y = 256, 256
     >>> x == y
     True
@@ -34,12 +35,13 @@ def main():
     True # Why True??
     >>> x = 257
     >>> y = 257
+    >>> x == y
+    True
     >>> x is y
     False # But here False??
     >>> 
-    """
 
-# reverse list same id?
+    """
 
 
 if __name__ == '__main__':
