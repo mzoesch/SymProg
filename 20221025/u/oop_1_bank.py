@@ -1,3 +1,5 @@
+import re
+
 """Exercise 1: (5 points)
 
 a) Using the slides & the script, put together a file containing the
@@ -27,7 +29,7 @@ class Account:
     You have to remove the pass statement and then write some
     code for the class. """
 
-    def __init__(self, account_holder: str, balance: float):
+    def __init__(self, id: int, holder: str, balance: float = 0.) -> None:
         """
 
         Class acts as a simple bank account.\n
@@ -36,118 +38,151 @@ class Account:
 
         """
 
-        self.__account_holder: str = account_holder  # private attribute
+        self.id = id
+        self.__holder: str = holder  # private attribute
         self._balance: float = balance
-        return
 
     @property
-    def account_holder(self):
-        """ Acts as a getter for account_holder. A separate getter method is not needed. """
+    def holder(self):
+        """ Acts as a getter for holder. A separate getter method is not needed. """
 
-        return self.__account_holder
+        return self.__holder
 
-    @account_holder.setter
-    def account_holder(self, value: str):
-        """ Setter method for __account_holder. """
+    @holder.setter
+    def holder(self, value):
+        """ Setter method for __holder. """
 
-        self.__account_holder = value
-        return
+        if (not type(value) is str):
+            print(  # Not raising error as in script, but printing error message,
+                # so that the program can continue running without crashing.
+                'Name of person must be of type string.'
+            )
+            return
+        if not re.match('\w+( \w+)*', value.strip()):
+            print(
+                'Name of person must be a string of letters and spaces.'
+            )
+            return
 
-    # @account_holder.getter
-    # def account_holder(self):
-    #     """ Getter method for __account_holder. """
+        self.__holder = value
 
-    #     return self.__account_holder
+    # @holder.getter
+    # def holder(self):
+    #    """ Getter method for __holder. """
+    #
+    #    return self.__holder
+
+    @property
+    def balance(self):
+        """ Acts as a getter for account balance. """
+
+        return self._balance
 
     def deposit(self, amount):
         """ Deposit money into the account. Negative amounts are not allowed. """
 
         if amount <= 0.:
-            print('You cannot deposit negative amounts.')
+            print(
+                'You can not deposit a negative amount or zero.'
+            )
             return
 
         self._balance += amount
-        return
+        return self._balance
 
     def withdraw(self, amount):
-        """ Withdraw money (max 1000€) from the account. Negative amounts are not allowed. """
+        """ Withdraw money from the account. Negative amounts are not allowed. """
 
-        # Invalid amounts
-        if amount <= 0:
-            print('You cannot withdraw negative amounts.')
-            return
-        if amount > 1_000:
-            print('You cannot withdraw more than 1,000€ from your account.')
+        if amount <= 0.:
+            print(
+                'You can not withdraw a negative amount or zero.'
+            )
             return
 
-        # Balance below zero
-        if self._balance <= -1_000:
-            print('You have to mouch debts. You cannot withdraw any money anymore.')
+        if self._balance <= -1_000.:
+            print(
+                'You have reached your maximum debt. You can not withdraw any more.'
+            )
             return
+
         if self._balance - amount < -1_000.:
-            # _balance is always below zero or is zero
-            r, self._balance = 1_000 - abs(self._balance), -1_000
-            print('You can only have a max amount of debts (1,000€) at this bank.')
-            print(f'Withdrawn {r}€ instead.')
+            r, self._balance = self._balance + 1_000., -1_000.
+            print(
+                f'You have reached your maximum debt (1000€). Could only withdraw: {r}€'
+            )
             return r
 
         self._balance -= amount
         return amount
 
-    def apply_interest(self, rate: float = 0.015):
+    def apply_interest(self, rate: float = 0.015) -> float:
         """ Apply interest rate of 1.5% (default) to current balance. """
 
-        if self._balance <= 0:
-            print('No interest on debts.')
+        if self._balance <= 0.:
+            print(
+                'No interest on debts.'
+            )
             return
-        if rate <= 0:
-            print('Interest rate has to be positive.')
+        if rate <= 0.:
+            print(
+                'Interest rate has to be positive.'
+            )
             return
 
         self._balance += self._balance * rate
         return self._balance
 
-    def __str__(self):
+    def __str__(self) -> str:
         """ Return a string representation of the account. """
 
-        return f'{self.account_holder} has {self._balance}€ in their account.'
+        return f'''
+══════ Accout Info ══════
+ID:         : {self.id}
+Holder:     : {self.holder}
+Balance:    : {self._balance}€
+'''
 
 
-def main():
+def main(*args, **kwargs) -> None:
     """ Main application. """
 
-    account1 = Account('John Smith', 1_000.)
-    account2 = Account('Sue Schafer', 2_000.)
-    account3 = Account('Max Mustermann', 0.)
+    acc1 = Account(1, 'John Doe', 1_000.)
+    acc2 = Account(2, 'Sue Schafer', 2_000.)
+    acc3 = Account(3, 'Tim Schuster')
+    print(acc1)
+    print(acc2)
+    print(f'{acc3}\n')
 
-    print(account1)
-    print(account2)
-    print(f'{account3}\n')
+    acc1.deposit(1_000.)  # Does not throw
+    acc2.deposit(-100.)  # Negative amount
+    acc3.deposit(200.)  # Does not throw
+    print(acc1)
+    print(acc2)
+    print(f'{acc3}\n')
 
-    account1.withdraw(500.)  # Does not throw
-    account1.withdraw(-50.)  # Negative amount
-    account1.withdraw(2000.)  # To much withdrawn
-    account2.withdraw(1000.)  # Max amount
-    account3.withdraw(500.)  # Negative balance
-    account3.withdraw(700.)  # Max debt
-    print(account1)
-    print(account2)
-    print(f'{account3}\n')
+    acc1.withdraw(500.)  # Does not throw
+    acc1.withdraw(-50.)  # Negative amount
+    acc2.withdraw(2_500.)  # Balance now negative
+    acc3.withdraw(2_000.)  # Max debt
+    print(acc1)
+    print(acc2)
+    print(f'{acc3}\n')
 
-    account1.apply_interest()
-    account2.apply_interest()
-    account3.apply_interest()  # No interest on debts
-    print(account1)
-    print(account2)
-    print(f'{account3}\n')
+    acc1.apply_interest()
+    acc2.deposit(1_000.)  # Deposit to get out of debt
+    acc2.apply_interest()
+    acc3.apply_interest()  # No interest on debts
+    print(acc1)
+    print(acc2)
+    print(f'{acc3}\n')
 
-    print(f'Account holder is {account1.account_holder}')
-    account1.account_holder = "John Doe"
-    print(f'Account holder is {account1.account_holder}')
+    print(f'Account holder is {acc1.holder}')
+    acc1.holder = "John Smith"
+    print(f'Account holder is {acc1.holder}')
 
     return
 
 
 if __name__ == '__main__':
-    print('Welcome to the Python Bank!\n')
+    print('Welcome to the Python Bank.\n')
     main()
