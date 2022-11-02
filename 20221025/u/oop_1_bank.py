@@ -41,6 +41,7 @@ class Account:
         self.id = id
         self.__holder: str = holder  # private attribute
         self._balance: float = balance
+        return
 
     @property
     def holder(self):

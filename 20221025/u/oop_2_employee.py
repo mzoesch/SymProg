@@ -16,7 +16,8 @@ c) Create a department dictionary (dictionary of strings to lists/sets
 
 
 class Employee:
-    def __init__(self, name: str, salary: float):
+
+    def __init__(self, name: str, salary: float) -> None:
         self.name: str = name
         self.salary: float = salary
         return
@@ -36,36 +37,34 @@ class Employee:
         return self.name
 
 
-def main():
-    employee1 = Employee('John', 1000)
-    employee2 = Employee('Jane', 2000)
-    employee3 = Employee('Jack', 3000)
-    employee4 = Employee('Jill', 4000)
-    employee5 = Employee('Jenny', 5000)
-    employee6 = Employee('Jenny', 6000)
+def main(*args, **kwargs) -> None:
+    """ Main application. """
 
+    employee1 = Employee('John', 1000.)
+    employee2 = Employee('Jane', 2000.)
+    employee3 = Employee('Jack', 3000.)
+    employee4 = Employee('Jill', 4000.)
+    employee5 = Employee('Jone', 5000.)
+    employee6 = Employee('Jona', 6000.)
     print(employee1)
     print(employee2)
     print(employee3)
     print(employee4)
     print(employee5)
-    print(employee6)
-    print('\n')
+    print(f'{employee6}\n')
 
-    employee1.apply_raise_amount(100)
+    employee1.apply_raise_amount(100.)
     employee2.apply_raise_precentage(0.1)
     employee3.apply_raise_precentage()
-    employee4.apply_raise_amount(500)
-    employee5.apply_raise_amount(150)
+    employee4.apply_raise_amount(500.)
+    employee5.apply_raise_amount(150.)
     employee6.apply_raise_precentage()
-
     print(employee1)
     print(employee2)
     print(employee3)
     print(employee4)
     print(employee5)
-    print(employee6)
-    print('\n')
+    print(f'{employee6}\n')
 
     departments = {
         'accounting':   {employee1, employee2, employee3},
@@ -79,5 +78,5 @@ def main():
 
 
 if __name__ == '__main__':
-    print('Employee application\n')
+    print('Employee application.\n')
     main()
