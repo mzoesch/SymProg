@@ -131,7 +131,7 @@ dmypy.json
 # Pycharm
 .idea/
 
-# Max OS X
+# Mac OS X
 .DS_Store
 
 # Prj files
