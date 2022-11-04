@@ -38,7 +38,7 @@ class Account:
 
         """
 
-        self.id = id
+        self.id: int = id
         self.__holder: str = holder  # private attribute
         self._balance: float = balance
         return
