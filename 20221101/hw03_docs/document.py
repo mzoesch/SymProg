@@ -4,14 +4,14 @@ import nltk
 def normalized_tokens(text):
     """ This takes a string and returns lower-case tokens, using nltk for tokenization. """
 
-    # pass  # TODO: return list with lower-case tokens.
+    # pass  # TODO: return list with lower-case tokens. -> ok
     return [token.lower() for token in nltk.word_tokenize(text)]
 
 
 class TextDocument:
 
     @staticmethod
-    def word_to_count(text):
+    def word_to_count(text: str) -> dict:
         """ This takes a string and returns a dictionary that maps words to their counts. """
 
         dict = {}
@@ -32,28 +32,30 @@ class TextDocument:
         self.word_to_count =\
             self.word_to_count(
                 self.text
-            )  # TODO: Create dictionary that maps words to their counts.
+            )  # TODO: Create dictionary that maps words to their counts. -> ok
         self.id = id
 
     @classmethod
     def from_file(cls, filename):
         """ This creates a TextDocument instance by reading a file. """
 
-        text = ""  # TODO: read text from filename
+        text = ""  # TODO: read text from filename -> ok
         with open(filename, 'r') as f:
             return cls(f.read(), filename)
+
+        ...
 
     def __str__(self):
         """ This returns a short string representation, which is at most 25 characters long.
         If the original text is longer than 25 characters, the last 3 characters of the short string should be '...'.
         """
-        # pass  # TODO: Implement correct return statement.
-        return f'{self.text[:22]}...' if len(self.text) > 25 else self.text
+        # pass  # TODO: Implement correct return statement. -> ok
+        return f'{self.text[:25 - 3]}...' if len(self.text) > 25 else self.text
 
     def word_overlap(self, other_doc):
         """ This returns the number of words that occur in both documents (self and other_doc) at the same time.
         Every word should be considered only once, irrespective of how often it occurs in either document (i.e. we
         consider word *types*).
         """
-        # pass  # TODO: Implement correct return statement.
+        # pass  # TODO: Implement correct return statement. -> ok
         return len(set(self.word_to_count.keys()) & set(other_doc.word_to_count.keys()))
