@@ -58,7 +58,4 @@ class TextDocument:
         consider word *types*).
         """
         # pass  # TODO: Implement correct return statement. -> ok
-        print(self.word_to_count.keys())
-        print(set(self.word_to_count.keys()))
-        print(len((self.word_to_count.keys())))
         return len(set(self.word_to_count.keys()) & set(other_doc.word_to_count.keys()))
