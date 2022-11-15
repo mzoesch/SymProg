@@ -24,7 +24,8 @@ class AnalyzerTest(TestCase):
         self.assertEqual(self.analyzer.vocabularySize(), 1390)
 
     def test_03_diversity(self):
-        self.assertEqual(int(self.analyzer.lexicalDiversity()), 3)
+        # self.assertEqual(int(self.analyzer.lexicalDiversity()), 3)
+        self.assertEqual(round(self.analyzer.lexicalDiversity(), 4), 0.3085)
 
     def test_04_get_keywords(self):
         self.assertEqual(self.analyzer.getKeywords()[:3],
@@ -39,14 +40,14 @@ class AnalyzerTest(TestCase):
     def test_06_avWordLength(self):
         self.assertEqual(int(self.analyzer.avWordLength()), 6)
 
-        # def test_07_topSuffixes(self):
-        #   topSuffixes = ['ed', 'ng', 'er', 'ly', 'on', 'es', 'al', 'nt', 'ce', 'le']
-        #   self.assertEqual(self.analyzer.topSuffixes(),topSuffixes)
+    # def test_07_topSuffixes(self):
+    #   topSuffixes = ['ed', 'ng', 'er', 'ly', 'on', 'es', 'al', 'nt', 'ce', 'le']
+    #   self.assertEqual(self.analyzer.topSuffixes(),topSuffixes)
 
-        # def test_08_topPrefixes(self):
-        #   topPrefixes = ['co', 're', 'in', 'pr', 'de', 'ex', 'di', 'be', 'th', 'ma']
-        #   self.assertEqual(self.analyzer.topPrefixes(),topPrefixes)
+    # def test_08_topPrefixes(self):
+    #   topPrefixes = ['co', 're', 'in', 'pr', 'de', 'ex', 'di', 'be', 'th', 'ma']
+    #   self.assertEqual(self.analyzer.topPrefixes(),topPrefixes)
 
-        # def test_09_tokensTypical(self):
-        #   typical = ['becoming', 'bed', 'beginner', 'beginning', 'being']
-        #   self.assertEqual(self.analyzer.tokensTypical(),typical)
+    # def test_09_tokensTypical(self):
+    #   typical = ['becoming', 'bed', 'beginner', 'beginning', 'being']
+    #   self.assertEqual(self.analyzer.tokensTypical(),typical)

@@ -3,6 +3,8 @@ from unittest import TestCase
 # this script and whether you have defined the src folder as the Source Root in PyCharm, you
 # might need to change the following import to remove hw04_nltk
 from hw04_nltk.model_lang import LangModeler
+import nltk
+# nltk.download('udhr')
 from nltk.corpus import udhr
 
 
