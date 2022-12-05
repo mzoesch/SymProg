@@ -18,7 +18,7 @@ class LangModeler(object):
                                         )
 
     def guess_language(self, language_model_cfd, text):
-        """Returns the guessed language for the given text"""
+        """ Returns the guessed language for the given text """
 
         # TODO for each language calculate the overall score of a given text
         # TODO based on the frequency of words accessible by
