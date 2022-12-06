@@ -48,7 +48,6 @@ class PosExpr:
             return pos.startswith(expr[0:-1])
         return expr == pos
 
-
     def match_seq(self, sequence):
         """This method returns a list of matches in the given sequence
         (a sequence here is a list of (word,pos)-pairs -- see following example).
@@ -64,7 +63,6 @@ class PosExpr:
             if all(self.match_expr(exp, pos) for pos, exp in zip(subseq_pos, self.expressions)):
                 matches.append(sequence[start:end])
         return matches
-
 
     # The function below implements the same logic as match_seq above, but is written in a more verbose way
     #
@@ -90,7 +88,6 @@ class PosExpr:
     #
     #     return matches
 
-
     @staticmethod
     def find_str(sentences, expr):
         """Return a list of strings that match the given expression. E.g.
@@ -108,5 +105,5 @@ class PosExpr:
 
 if __name__ == '__main__':
     p = PosExpr.from_string("X Y")
-    seq = [('a','X'), ('b', 'Y'), ('c', 'Z'),('d', 'X'), ('e', 'Y')]
+    seq = [('a', 'X'), ('b', 'Y'), ('c', 'Z'), ('d', 'X'), ('e', 'Y')]
     matches = p.match_seq(seq)
