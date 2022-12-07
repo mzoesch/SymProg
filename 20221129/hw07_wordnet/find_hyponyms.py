@@ -17,36 +17,48 @@ class HyponymSearcher(object):
         sentences = nltk.sent_tokenize(text)
 
         # TODO Split into tokens: use nltk.word_tokenize
-        tokens = [nltk.word_tokenize(sentence) for sentence in sentences]
+        sentences_tokens = [
+            nltk.word_tokenize(
+                sentence
+            )
+            for sentence in sentences
+        ]
 
         # TODO Perform POS tagging on all tokens of all sentences (not on each sentence separately)
-        tagged_tokens = [nltk.pos_tag(token) for token in tokens]
+        tokens = []
+        for sentence in sentences_tokens:
+            for token in sentence:
+                tokens.append(token)
+        tagged_tokens = nltk.pos_tag(tokens)
 
         # TODO lemmatize nouns (any token whose POS tags starts with "N"): use WordNetLemmatizer()
         lemmatizer = WordNetLemmatizer()
 
         # TODO determine all noun lemmas and save it in self.noun_lemmas
-        for sentence in tagged_tokens:
-            for token, tag in sentence:
-                if tag.startswith('N'):
-                    self.noun_lemmas.append(
-                        lemmatizer.lemmatize(token).lower()
-                    )
+        for token, tag in tagged_tokens:
+            if tag.startswith('N'):
+                self.noun_lemmas.append(
+                    lemmatizer.lemmatize(token).lower()
+                )
 
     def hypernym_of(self, synset1, synset2):
+
         # TODO Is synset2 a hypernym of synset 1? (Or the same synset), return True or False
+
         if synset1 == synset2:
             return True
         synset_1_hypernyms = synset1.hypernyms()
         synset2_hypernyms = synset2.hypernyms()
 
         for hypernym in synset_1_hypernyms:
+
             if hypernym in synset2_hypernyms:
                 return True
-            else:
-                return self.hypernym_of(hypernym, synset2)
+
+            return self.hypernym_of(hypernym, synset2)
 
     def get_hyponyms(self, hypernym):
+
         # TODO determine set of noun lemmas in ada_lovelace.txt that are hyponyms of the given hypernym
         # use the implemented method hypernymOf(self, synset1, synset2)
 
@@ -55,4 +67,5 @@ class HyponymSearcher(object):
             for synset in wordnet.synsets(lemma):
                 if self.hypernym_of(synset, hypernym):
                     hyponyms.add(lemma)
+
         return hyponyms
