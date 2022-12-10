@@ -140,3 +140,4 @@ file.txt
 !regex.pdf
 !dummy.pdf
 .idea/
+data/enron/*
