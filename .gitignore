@@ -141,3 +141,4 @@ file.txt
 !dummy.pdf
 .idea/
 data/enron/*
+!data/enron/.gitkeep
