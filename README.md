@@ -18,7 +18,7 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://gitlab2.cip.ifi.lmu.de/cis/sp2223/group42.git
+git remote add origin \<linkToThisSite\>
 git branch -M main
 git push -uf origin main
 ```
